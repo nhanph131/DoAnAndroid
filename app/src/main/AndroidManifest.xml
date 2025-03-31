@@ -30,6 +30,11 @@
             android:exported="true"
             android:launchMode="singleInstance">
         </activity>
+
+        <activity android:name=".HomeActivity"
+            android:exported="true"
+            android:launchMode="singleInstance">
+        </activity>
     </application>
 
 </manifest>
