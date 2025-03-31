@@ -21,6 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".LoginActivity"
+            android:exported="true"
+            android:launchMode="singleInstance">
+        </activity>
+        <activity android:name=".SignUpActivity"
+            android:exported="true"
+            android:launchMode="singleInstance">
+        </activity>
     </application>
 
 </manifest>
