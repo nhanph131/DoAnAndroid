@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.nhanph.doanandroid.data.entities.Board;
 
@@ -17,6 +18,9 @@ public interface BoardDAO {
 
     @Delete
     void deleteBoard(Board board);
+
+    @Update
+    void updateBoard(Board board);
 
     @Query("SELECT * FROM board")
     List<Board> getAllBoards();

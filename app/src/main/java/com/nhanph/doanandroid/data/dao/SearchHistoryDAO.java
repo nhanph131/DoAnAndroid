@@ -25,4 +25,7 @@ public interface SearchHistoryDAO {
     @Query("DELETE FROM search_history WHERE keyword = :keyword")
     void deleteSearchHistoryByKeyword(String keyword);
 
+    @Query("SELECT * FROM search_history WHERE keyword LIKE '%' || :keyword || '%'")
+    List<SearchHistory> getSearchHistoryByKeyword(String keyword);
+
 }

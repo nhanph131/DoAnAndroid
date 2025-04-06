@@ -1,5 +1,7 @@
 package com.nhanph.doanandroid.data.entities;
 
+import android.annotation.SuppressLint;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -14,4 +16,10 @@ public class SearchHistory {
     int id;
     String keyword;
     LocalDateTime createdAt;
+
+    @SuppressLint("NewApi")
+    public SearchHistory(String keyword) {
+        this.keyword = keyword;
+        this.createdAt = LocalDateTime.now();
+    }
 }

@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.nhanph.doanandroid.data.entities.Pin;
 import java.util.List;
@@ -16,6 +17,9 @@ public interface PinDAO {
 
     @Delete
     void deletePin(Pin pin);
+
+    @Update
+    void updatePin(Pin pin);
 
     @Query("DELETE FROM pin WHERE id = :id")
     void deletePinById(int id);

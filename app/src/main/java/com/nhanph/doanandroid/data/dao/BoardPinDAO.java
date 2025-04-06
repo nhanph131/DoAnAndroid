@@ -18,6 +18,9 @@ public interface BoardPinDAO {
     @Delete
     void deleteBoardPin(BoardPin boardPin);
 
+    @Query("SELECT * FROM board_pin")
+    List<BoardPin> getAllBoardPins();
+
     @Query("SELECT * FROM board_pin WHERE boardId = :boardId")
     List<BoardPin> getAllBoardPinByBoardId(int boardId);
 

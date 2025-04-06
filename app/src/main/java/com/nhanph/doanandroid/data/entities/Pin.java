@@ -21,4 +21,5 @@ public class Pin {
     LocalDate createdAt;
 
     String userId;
+
 }

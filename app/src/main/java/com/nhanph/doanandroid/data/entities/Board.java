@@ -19,4 +19,5 @@ public class Board {
     LocalDate createdAt;
 
     String userId;
+
 }
