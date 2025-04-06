@@ -1,15 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
-
-    // KHÔNG dùng kotlin-kapt nếu chỉ dùng Java
 }
 
 android {
-    namespace = "com.example.doanandroid"
+    namespace = "com.nhanph.doanandroid"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.doanandroid"
+        applicationId = "com.nhanph.doanandroid"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -34,36 +32,26 @@ android {
 }
 
 dependencies {
-    val roomVersion = "2.6.1"
-    // Thư viện Lifecycle (bắt buộc)
-    val lifecycleVersion = "2.6.2"  // Kiểm tra phiên bản mới nhất tại: https://developer.android.com/jetpack/androidx/releases/lifecycle
+
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.activity)
+    implementation(libs.constraintlayout)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion") // Dùng annotationProcessor thay vì kapt
+    implementation(libs.lombok)
+    annotationProcessor(libs.lombok)
 
-    // AndroidX Core
-    implementation("androidx.core:core:1.12.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("androidx.work:work-runtime:2.10.0")
 
-    // Testing
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    val room_version = "2.5.2"
 
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
 
-
-
-
-    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion")  // ViewModel
-    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycleVersion")   // LiveData
-    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion") // Hỗ trợ Java 8
-
-    // Optional: ProcessLifecycleOwner (theo dõi lifecycle toàn app)
-    // implementation("androidx.lifecycle:lifecycle-process:$lifecycleVersion")
-
-    // Optional: ReactiveStreams với LiveData
-    // implementation("androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion")
 }
