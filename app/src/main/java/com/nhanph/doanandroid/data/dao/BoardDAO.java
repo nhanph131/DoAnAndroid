@@ -3,28 +3,26 @@ package com.nhanph.doanandroid.data.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.nhanph.doanandroid.data.entities.Board;
 
 import java.util.List;
-
 @Dao
 public interface BoardDAO {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     void insertBoard(Board board);
+
+    @Update
+    void updateBoard(Board board);
 
     @Delete
     void deleteBoard(Board board);
 
-    @Query("SELECT * FROM board")
-    List<Board> getAllBoards();
+    @Query("SELECT * FROM boards WHERE board_id = :boardId")
+    Board getBoardById(int boardId);
 
-    @Query("SELECT * FROM board WHERE id = :id")
-    Board getBoardById(int id);
-
-    @Query("SELECT * FROM board WHERE userId = :userId")
-    List<Board> getBoardsByUserId(int userId);
-
+    @Query("SELECT * FROM boards WHERE user_id = :userId")
+    List<Board> getBoardsByUser(int userId);
 }
