@@ -1,13 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
+
+    // KHÔNG dùng kotlin-kapt nếu chỉ dùng Java
 }
 
 android {
-    namespace = "com.nhanph.doanandroid"
+    namespace = "com.example.doanandroid"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.nhanph.doanandroid"
+        applicationId = "com.example.doanandroid"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -32,7 +34,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -53,5 +54,5 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
-
+  
 }
