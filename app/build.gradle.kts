@@ -43,10 +43,11 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    implementation(libs.lombok)
+    annotationProcessor(libs.lombok)
 
-
-    implementation("com.google.code.gson:gson:2.8.9")
-    implementation("androidx.work:work-runtime:2.8.1")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("androidx.work:work-runtime:2.10.0")
 
     val room_version = "2.5.2"
 
