@@ -32,4 +32,9 @@ public interface UserDAO {
     @Query("SELECT * FROM user WHERE username = :username")
     User getUserByUsername(String username);
 
+    @Query("SELECT * FROM user WHERE id = :uid")
+    User getUserById(String uid);
+
+    @Query("SELECT EXISTS(SELECT 1 FROM user WHERE username = :username)")
+    boolean isExistsByUsername(String username);
 }

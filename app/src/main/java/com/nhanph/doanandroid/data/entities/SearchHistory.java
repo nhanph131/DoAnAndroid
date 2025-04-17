@@ -7,19 +7,16 @@ import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
 
-import lombok.Data;
-
-@Data
 @Entity(tableName = "search_history")
 public class SearchHistory {
     @PrimaryKey(autoGenerate = true)
     int id;
     String keyword;
-    LocalDateTime createdAt;
+    String createdAt;
 
     @SuppressLint("NewApi")
     public SearchHistory(String keyword) {
         this.keyword = keyword;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now().toString();
     }
 }

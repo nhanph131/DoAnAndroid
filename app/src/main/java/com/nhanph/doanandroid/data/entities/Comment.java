@@ -42,14 +42,15 @@ public class Comment {
     private int userId; // Khóa ngoại tham chiếu tới User
 
     @ColumnInfo(name = "created_at")
-    private Date createdAt; // Thời điểm tạo comment
+    private String createdAt; // Thời điểm tạo comment
 
     // Constructor
     public Comment(int pinId,int userId, String content) {
         this.pinId = pinId;
         this.userId = userId;
         this.content = content;
-        this.createdAt = new Date(); // Tự động gán thời gian hiện tại
+        Date k = new Date();
+        this.createdAt = k.toString();
     }
 
     // Getters and Setters
@@ -86,11 +87,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }

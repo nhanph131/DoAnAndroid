@@ -1,9 +1,10 @@
 package com.nhanph.doanandroid.data.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.time.LocalDate;
+import java.util.UUID;
 
 import lombok.Data;
 
@@ -11,14 +12,15 @@ import lombok.Data;
 @Entity(tableName = "pin")
 public class Pin {
     @PrimaryKey
-    String id;
+    @NonNull
+    String id = UUID.randomUUID().toString();
 
     String title;
     String description;
     String imageUrl;
     boolean publish;
     boolean commentAllow;
-    LocalDate createdAt;
+    String createdAt;
 
     String userId;
 
