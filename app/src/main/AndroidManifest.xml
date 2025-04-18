@@ -27,6 +27,10 @@
             android:exported="true"
             android:launchMode="singleInstance">
         </activity>
+        <activity android:name=".view.login.LoginActivity"
+            android:exported="true"
+            android:launchMode="singleInstance">
+        </activity>
         <activity android:name=".view.login.SignUpActivity"
             android:exported="true"
             android:launchMode="singleInstance">

@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void initEvent(){
         btnLogin.setOnClickListener(v -> {
-            //Intent intent = new Intent(this, LoginActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         });
 
         btnSignUp.setOnClickListener(v -> {
