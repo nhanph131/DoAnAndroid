@@ -15,8 +15,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private HomeViewModel viewModel;
     private ActivityHomeBinding binding;
-    private final String[] quickFilters = new String[] { "All", "Anime" };
-
     private final String[] floatingDock = new String[] { "Home", "Find", "Add", "Profile" };
 
     private HomePagerAdapter pagerAdapter;
