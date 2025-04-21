@@ -26,6 +26,8 @@ public class LoginViewModel extends ViewModel {
             User user = MainApplication.getDatabase().getUserDAO().getUserByUsername(username);
             if (user != null && user.getPassword().equals(password)) {
                 notification.postValue(AppNotificationCode.LOGIN_SUCCESS);
+
+                MainApplication.saveUid(user.getId());
             } else {
                 notification.postValue(AppNotificationCode.LOGIN_FAILED);
             }

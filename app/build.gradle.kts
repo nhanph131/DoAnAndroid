@@ -1,7 +1,5 @@
 plugins {
     alias(libs.plugins.android.application)
-
-    // KHÔNG dùng kotlin-kapt nếu chỉ dùng Java
 }
 
 android {
@@ -61,5 +59,4 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)  // ViewModel
     implementation(libs.lifecycle.livedata)   // LiveData
     implementation(libs.lifecycle.common.java8) // Hỗ trợ Java 8
-
 }

@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.nhanph.doanandroid.MainApplication;
 import com.nhanph.doanandroid.R;
+import com.nhanph.doanandroid.view.home.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
     public void initView(){
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
+
+        checkLogin();
+    }
+
+    private void checkLogin() {
+        if (MainApplication.getUid() != null) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void initEvent(){
