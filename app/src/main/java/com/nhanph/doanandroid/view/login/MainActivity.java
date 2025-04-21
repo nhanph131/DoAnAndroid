@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnLogin, btnSignUp;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSignUp.setOnClickListener(v -> {
             // Xử lý sự kiện khi người dùng nhấn nút đăng ký
-            Intent intent = new Intent(this, SignUpActivity.class);
+             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });
     }

@@ -1,5 +1,6 @@
 package com.nhanph.doanandroid.data.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -23,12 +24,14 @@ public interface BoardDAO {
     void updateBoard(Board board);
 
     @Query("SELECT * FROM board")
-    List<Board> getAllBoards();
+    LiveData<List<Board>> getAllBoards();  // Thêm LiveData<>
 
     @Query("SELECT * FROM board WHERE id = :id")
     Board getBoardById(int id);
 
     @Query("SELECT * FROM board WHERE userId = :userId")
-    List<Board> getBoardsByUserId(int userId);
+    LiveData<List<Board>> getBoardsByUserId(String userId);
+    @Query("SELECT * FROM board WHERE userId = :userId")
+    List<Board> getBoardsByUserIdSync(String userId); // Cho background thread
 
 }

@@ -25,5 +25,5 @@ public interface BoardPinDAO {
     List<BoardPin> getAllBoardPinByBoardId(int boardId);
 
     @Query("SELECT * FROM board_pin WHERE pinId = :pinId")
-    List<BoardPin> getAllBoardPinByPinId(int pinId);
+     List<BoardPin> getAllBoardPinByPinId(int pinId);
 }
