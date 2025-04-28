@@ -59,4 +59,20 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)  // ViewModel
     implementation(libs.lifecycle.livedata)   // LiveData
     implementation(libs.lifecycle.common.java8) // Hỗ trợ Java 8
+
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
+
+    implementation (libs.swiperefreshlayout)
+
+    //cloudinary android lib luu anh
+    implementation(libs.cloudinary.android)
+    implementation(libs.constraintlayout.v214)
+    implementation(libs.navigation.fragment.v277)
+    implementation(libs.navigation.ui.v277)
+
+    implementation("com.github.amarjain07:StickyScrollView:1.0.3")
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }

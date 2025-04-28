@@ -43,4 +43,9 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="avatar">avatar</string>
+    <string name="gap">gap</string>
+    <string name="imgurl">imgUrl</string>
+    <string name="pinname">pinName</string>
+    <string name="owner_avatar">owner_avatar</string>
+    <string name="option">option</string>
 </resources>

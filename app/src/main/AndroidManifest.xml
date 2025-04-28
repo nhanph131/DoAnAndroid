@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -35,7 +40,6 @@
             android:exported="true"
             android:launchMode="singleInstance">
         </activity>
-
     </application>
 
 </manifest>

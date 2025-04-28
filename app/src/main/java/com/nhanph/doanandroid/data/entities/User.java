@@ -20,8 +20,10 @@ public class User {
     String username;
     String password;
     String nickname;
+
     String avatarUrl;
     String email;
     String bio;
+
     String createdAt;
 }
