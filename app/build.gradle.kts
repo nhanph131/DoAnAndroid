@@ -59,4 +59,23 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)  // ViewModel
     implementation(libs.lifecycle.livedata)   // LiveData
     implementation(libs.lifecycle.common.java8) // Hỗ trợ Java 8
+
+
+
+
+    implementation("com.cloudinary:cloudinary-android:2.3.1")
+
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+
+
+
+
+    //implementation("gun0912.ted:tedbottompicker:1.2.6")
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+    //implementation ("com.github.User:Repo:Tag")
+
+
+
 }

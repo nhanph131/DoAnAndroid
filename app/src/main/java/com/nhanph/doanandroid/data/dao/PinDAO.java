@@ -1,5 +1,6 @@
 package com.nhanph.doanandroid.data.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -31,5 +32,7 @@ public interface PinDAO {
     List<Pin> getAllPins();
 
     @Query("SELECT * FROM pin WHERE userId = :userId")
-    List<Pin> getPinsByUserId(int userId);
+    LiveData<List<Pin>> getPinsByUserId(String userId);
+    @Query("SELECT * FROM pin WHERE title LIKE '%' || :keyword || '%'")
+    List<Pin> searchPinsByTitle(String keyword);
 }

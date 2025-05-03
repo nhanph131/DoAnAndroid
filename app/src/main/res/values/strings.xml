@@ -5,6 +5,28 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="select_image">Select Image</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="publish_publicly">Publish publicly</string>
+    <string name="create_pin">Create Pin</string>
+    <string name="pin_image">Pin image</string>
+    <string name="permission_denied">Permission Denied</string>
+
+    <string name="select_board_hint">Chọn Board để thêm vào</string>
+
+    <string name="publish_pin">Công khai Pin</string>
+    <string name="allow_comments">Cho phép bình luận</string>
+    <string name="add_to_board">Thêm vào Board</string>
+
+
+    <string name="permission_denied_message">Bạn cần cấp quyền để tiếp tục</string>
+    <string name="no_image_selected">Không có ảnh nào được chọn</string>
+    <string name="select_image_first">Vui lòng chọn ảnh trước</string>
+    <string name="title_required">Tiêu đề là bắt buộc</string>
+    <string name="pin_created_successfully">Tạo Pin thành công</string>
+    <string name="no_board_selected">Không thêm vào Board</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
