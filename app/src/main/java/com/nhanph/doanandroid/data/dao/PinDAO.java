@@ -21,10 +21,10 @@ public interface PinDAO {
     @Update
     void updatePin(Pin pin);
 
-    @Query("DELETE FROM pin WHERE id = :id")
+    @Query("DELETE FROM pin WHERE pinId = :id")
     void deletePinById(int id);
 
-    @Query("SELECT * FROM pin WHERE id = :id")
+    @Query("SELECT * FROM pin WHERE pinId = :id")
     Pin getPinById(int id);
 
     @Query("SELECT * FROM pin")

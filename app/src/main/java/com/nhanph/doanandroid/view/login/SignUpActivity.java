@@ -50,6 +50,12 @@ public class SignUpActivity extends AppCompatActivity {
 
             viewModel.signUp(nickname, username, password, confirmPassword);
         });
+
+        binding.txvLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void registerNotification(){
@@ -57,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
             switch (notification) {
                 case REGISTER_SUCCESS:
                     Toast.makeText(this, notification.getMessage(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                     break;

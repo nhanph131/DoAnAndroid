@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.nhanph.doanandroid.view.home.fragments.CreateNewFragment;
-import com.nhanph.doanandroid.view.home.fragments.ForYouFragment;
-import com.nhanph.doanandroid.view.home.fragments.ProfileFragment;
-import com.nhanph.doanandroid.view.home.fragments.SearchFragment;
+import com.nhanph.doanandroid.view.home.create.CreateNewFragment;
+import com.nhanph.doanandroid.view.home.feed.ForYouFragment;
+import com.nhanph.doanandroid.view.home.profile.ProfileFragment;
+import com.nhanph.doanandroid.view.home.search.SearchFragment;
 
 public class HomePagerAdapter extends FragmentStateAdapter {
     public HomePagerAdapter(@NonNull FragmentActivity fragmentActivity) {
@@ -19,14 +19,12 @@ public class HomePagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 0:
-                return new ForYouFragment(); // Tab "All"
             case 1:
-                return new SearchFragment(); // Tab "Create"
+                return new SearchFragment();
             case 2:
-                return new CreateNewFragment(); // Tab "Online Levels"
+                return new CreateNewFragment();
             case 3:
-                return new ProfileFragment() ; // Tab "Multiplayer"
+                return new ProfileFragment() ;
             default:
                 return new ForYouFragment();
         }

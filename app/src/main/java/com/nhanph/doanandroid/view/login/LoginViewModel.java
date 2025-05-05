@@ -28,6 +28,9 @@ public class LoginViewModel extends ViewModel {
                 notification.postValue(AppNotificationCode.LOGIN_SUCCESS);
 
                 MainApplication.saveUid(user.getId());
+                MainApplication.saveUsername(user.getUsername());
+                MainApplication.saveAvatarUrl(user.getAvatarUrl());
+                MainApplication.saveAvatarFileName();
             } else {
                 notification.postValue(AppNotificationCode.LOGIN_FAILED);
             }

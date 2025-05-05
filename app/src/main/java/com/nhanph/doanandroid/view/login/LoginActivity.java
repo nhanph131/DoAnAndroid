@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.txvSignup.setOnClickListener(v -> {
             startActivity(new Intent(this, SignUpActivity.class));
+            finish();
         });
     }
 

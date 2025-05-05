@@ -41,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         });
 
         btnSignUp.setOnClickListener(v -> {
             // Xử lý sự kiện khi người dùng nhấn nút đăng ký
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 }

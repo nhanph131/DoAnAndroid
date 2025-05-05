@@ -1,6 +1,7 @@
 package com.nhanph.doanandroid.data.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.nhanph.doanandroid.MainApplication;
 import com.nhanph.doanandroid.R;
+import com.nhanph.doanandroid.data.apiservice.response.pin.PinResponse;
+import com.nhanph.doanandroid.data.apiservice.response.user.UserProfileResponse;
+import com.nhanph.doanandroid.data.apiservice.retrofit.ResponseApi;
 import com.nhanph.doanandroid.data.entities.Pin;
+import com.nhanph.doanandroid.data.interfaces.OnPinClickListener;
+import com.nhanph.doanandroid.utility.validator.AppNotificationCode;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
 
@@ -23,10 +34,13 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
 
     private final boolean pinInfoEnabled;
 
-    public PinAdapter(Context context, List<Pin> pinList, boolean pinInfoEnabled) {
+    private OnPinClickListener onPinClickListener;
+
+    public PinAdapter(Context context, List<Pin> pinList, boolean pinInfoEnabled, OnPinClickListener onPinClickListener) {
         this.context = context;
         this.pinList = pinList;
         this.pinInfoEnabled = pinInfoEnabled;
+        this.onPinClickListener = onPinClickListener;
     }
 
     @NonNull
@@ -49,6 +63,35 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
 
 
         holder.description.setText(pin.getDescription());
+
+        MainApplication.getApiService().getProfileById(pin.getUserId()).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<ResponseApi<UserProfileResponse>> call, Response<ResponseApi<UserProfileResponse>> response) {
+                if (response.isSuccessful()) {
+                    ResponseApi<UserProfileResponse> res = response.body();
+                    if (res != null) {
+                        UserProfileResponse userProfileResponse = res.getData();
+                        if (userProfileResponse != null) {
+                            Glide.with(context)
+                                    .load(userProfileResponse.getAvatarUrl())
+                                    .override(400, 400)
+                                    .fitCenter()
+                                    .into(holder.avatar);
+                            Log.d("APISERVICE", "onResponse: " + userProfileResponse.getAvatarUrl());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseApi<UserProfileResponse>> call, Throwable t) {
+                Log.d("APISERVICE", "onFailure: " + t.getMessage() );
+            }
+        });
+
+        holder.pin_image.setOnClickListener(v -> onPinClickListener.onPinClick(position));
+
+        //holder.pin_image.setOnLongClickListener(v -> onPinClickListener.onPinLongClick(position));
     }
 
     @Override

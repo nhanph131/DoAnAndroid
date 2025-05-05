@@ -4,23 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:id="@+id/container_setting"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="120dp"
-        android:visibility="gone"
-        >
-    </FrameLayout>
-    <FrameLayout
-        android:id="@+id/overlay_blocker"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00000000"
-        android:visibility="gone"
-        android:clickable="true"
-        android:focusable="true"
-        android:elevation="110dp"/>
 
     <LinearLayout
         android:id="@+id/header"
@@ -29,7 +12,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="vertical"
-        android:elevation="100dp"
         android:background="@android:color/transparent">
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,7 +102,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:elevation="100dp"
         app:cardCornerRadius="24dp">
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_content"
@@ -128,4 +109,12 @@
             android:layout_height="match_parent"
             />
     </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/child_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        >
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

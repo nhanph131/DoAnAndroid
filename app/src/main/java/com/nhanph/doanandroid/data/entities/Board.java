@@ -11,9 +11,8 @@ import lombok.Data;
 @Data
 @Entity(tableName = "board")
 public class Board {
-    @NonNull
-    @PrimaryKey()
-    String id = UUID.randomUUID().toString();
+    @PrimaryKey(autoGenerate = true)
+    int boardId;
 
     String name;
     boolean publish;

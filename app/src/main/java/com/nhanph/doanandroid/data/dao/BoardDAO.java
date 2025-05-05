@@ -25,7 +25,7 @@ public interface BoardDAO {
     @Query("SELECT * FROM board")
     List<Board> getAllBoards();
 
-    @Query("SELECT * FROM board WHERE id = :id")
+    @Query("SELECT * FROM board WHERE boardId = :id")
     Board getBoardById(int id);
 
     @Query("SELECT * FROM board WHERE userId = :userId")

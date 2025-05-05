@@ -24,7 +24,6 @@
             android:contentDescription="@string/imgurl" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Thông tin mô tả dưới ảnh -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pin_info"
         android:layout_width="match_parent"
@@ -34,14 +33,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="4dp">
 
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/avatar_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:contentDescription="@string/owner_avatar" />
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/owner_avatar" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/description"
@@ -51,7 +56,7 @@
             android:textSize="14sp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintStart_toEndOf="@id/avatar_card"
             app:layout_constraintEnd_toStartOf="@id/action"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -63,6 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_more_black"
             android:contentDescription="@string/option" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
