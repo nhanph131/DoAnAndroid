@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.nhanph.doanandroid.data.interfaces.OnPinClickListener;
-import com.nhanph.doanandroid.view.home.profile.profile_view.ProfileBoardFragment;
-import com.nhanph.doanandroid.view.home.profile.profile_view.ProfilePinFragment;
+import com.nhanph.doanandroid.view.home.profile.profile_child_fragment.ProfileBoardFragment;
+import com.nhanph.doanandroid.view.home.profile.profile_child_fragment.ProfilePinFragment;
 
 public class ProfilePagerAdapter extends FragmentStateAdapter {
     public ProfilePagerAdapter(@NonNull Fragment fragment) {
@@ -24,10 +24,7 @@ public class ProfilePagerAdapter extends FragmentStateAdapter {
             return new ProfileBoardFragment();
         }
         else{
-            ProfilePinFragment profilePinFragment = new ProfilePinFragment(2, true);
-            profilePinFragment.setPinClickListener(pinClickListener);
-
-            return  profilePinFragment;
+            return new ProfilePinFragment(2, true);
         }
     }
 

@@ -1,16 +1,16 @@
 package com.nhanph.doanandroid.view.home.profile;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.nhanph.doanandroid.MainApplication;
@@ -18,8 +18,11 @@ import com.nhanph.doanandroid.R;
 import com.nhanph.doanandroid.data.adapter.ProfilePagerAdapter;
 import com.nhanph.doanandroid.data.interfaces.OnPinClickListener;
 import com.nhanph.doanandroid.databinding.FragmentHomeProfileBinding;
+import com.nhanph.doanandroid.utility.helper.PinClickHelper;
 import com.nhanph.doanandroid.view.home.feed.PinDetailFragment;
-import com.nhanph.doanandroid.view.home.profile.profile_view.ProfileSettingFragment;
+import com.nhanph.doanandroid.view.home.profile.profile_child_fragment.ProfileSettingFragment;
+
+import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -27,10 +30,14 @@ public class ProfileFragment extends Fragment {
     private OnPinClickListener pinClickListener;
     private FragmentHomeProfileBinding binding;
 
+    private ShareDataViewModel shareDataViewModel;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentHomeProfileBinding.inflate(inflater, container, false);
+
+        shareDataViewModel = new ViewModelProvider(requireActivity()).get(ShareDataViewModel.class);
 
         return binding.getRoot();
     }
@@ -50,27 +57,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initView(View view) {
-        pinClickListener = new OnPinClickListener() {
-            @Override
-            public void onPinClick(int position) {
-                getChildFragmentManager().beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.slide_in_right,  // enter
-                                R.anim.slide_out_left,  // exit
-                                R.anim.slide_in_left,   // pop enter (khi quay lại)
-                                R.anim.slide_out_right  // pop exit
-                        )
-                        .add(binding.childFragment.getId(), new PinDetailFragment(), "pin-detail")
-                        .addToBackStack(null)
-                        .commit();
-            }
-
-            @Override
-            public void onPinLongClick(int position) {
-
-            }
-        };
-        profilePagerAdapter = new ProfilePagerAdapter(this, pinClickListener);
+        profilePagerAdapter = new ProfilePagerAdapter(this);
         binding.mainContent.setAdapter(profilePagerAdapter);
         MainApplication.loadAvatarIntoView(requireContext(), binding.avatar);
 
@@ -83,6 +70,13 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initEvent(View view) {
+        shareDataViewModel.getSelectedPin().observe(getViewLifecycleOwner(), pin -> {
+           if (pin != null) {
+               PinClickHelper.handlePinClick(this, binding.childFragment.getId(), pin);
+           }
+        });
+
+
         binding.avatar.setOnClickListener(v -> {
             getChildFragmentManager().beginTransaction()
                     .setCustomAnimations(

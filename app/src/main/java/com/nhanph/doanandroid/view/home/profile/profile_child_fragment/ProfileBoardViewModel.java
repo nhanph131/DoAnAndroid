@@ -1,4 +1,4 @@
-package com.nhanph.doanandroid.view.home.profile.profile_view;
+package com.nhanph.doanandroid.view.home.profile.profile_child_fragment;
 
 import androidx.lifecycle.ViewModel;
 

@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.nhanph.doanandroid.view.home.create.CreateNewFragment;
-import com.nhanph.doanandroid.view.home.feed.ForYouFragment;
+import com.nhanph.doanandroid.view.home.feed.FeedFragment;
 import com.nhanph.doanandroid.view.home.profile.ProfileFragment;
 import com.nhanph.doanandroid.view.home.search.SearchFragment;
 
@@ -26,7 +26,7 @@ public class HomePagerAdapter extends FragmentStateAdapter {
             case 3:
                 return new ProfileFragment() ;
             default:
-                return new ForYouFragment();
+                return new FeedFragment();
         }
     }
 

@@ -39,6 +39,20 @@ public class MainApplication extends Application {
     @Getter
     private static final ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
 
+    public static void saveNickname(String nickname) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("nickname", nickname);
+        editor.apply();
+    }
+    public static String getNickname() {
+        return sharedPreferences.getString("nickname", null);
+    }
+    public static void clearNickname() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("nickname");
+        editor.apply();
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -85,7 +99,8 @@ public class MainApplication extends Application {
     }
 
     public static String getAvatarUrl(){
-        return sharedPreferences.getString("avatarUrl", null);
+        String s = sharedPreferences.getString("avatarUrl", null);
+        return  s;
     }
 
     public static void clearAvatarUrl(){
@@ -107,8 +122,11 @@ public class MainApplication extends Application {
     public static Bitmap loadAvatarFromInternalStorage(Context context) {
         try {
             FileInputStream fis = context.openFileInput(getAvatarFileName());
+            if (fis == null) {
+                return null;
+            }
             return BitmapFactory.decodeStream(fis);
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.d("loadAvatarFromInternalStorage", "Error loading avatar: " + e.getMessage());
             return null;
         }
@@ -121,7 +139,8 @@ public class MainApplication extends Application {
     }
 
     public static String getAvatarFileName(){
-        return sharedPreferences.getString("avatarFileName", null);
+        String s = sharedPreferences.getString("avatarFileName", null);
+        return s;
     }
 
     public static void clearAvatarFileName(){
@@ -131,6 +150,8 @@ public class MainApplication extends Application {
     }
     public static void loadAvatarIntoView(Context context, ImageView imageView){
         Bitmap avatarBitmap = loadAvatarFromInternalStorage(context);
+
+        String s = getAvatarUrl();
 
         if (avatarBitmap != null) {
             imageView.setImageBitmap(avatarBitmap);
@@ -142,6 +163,7 @@ public class MainApplication extends Application {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                             imageView.setImageBitmap(resource);
+                            saveAvatarFileName();
                             saveAvatarToInternalStorage(context, resource);
                         }
                         @Override
@@ -149,5 +171,30 @@ public class MainApplication extends Application {
                     });
         }
 
+    }
+
+    //luu token
+    public static  void saveToken(String token){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("token", token);
+        editor.apply();
+    }
+
+    public static String getToken(){
+        return sharedPreferences.getString("token", null);
+    }
+
+    public static void clearToken(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("token");
+        editor.apply();
+    }
+
+    public static void logout(){
+        clearUid();
+        clearUsername();
+        clearAvatarUrl();
+        clearAvatarFileName();
+        clearToken();
     }
 }

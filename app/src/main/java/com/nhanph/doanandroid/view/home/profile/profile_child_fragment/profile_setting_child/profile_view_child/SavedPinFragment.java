@@ -1,4 +1,4 @@
-package com.nhanph.doanandroid.view.home.profile.profile_view;
+package com.nhanph.doanandroid.view.home.profile.profile_child_fragment.profile_setting_child.profile_view_child;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -15,21 +15,25 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.nhanph.doanandroid.R;
 import com.nhanph.doanandroid.data.adapter.PinAdapter;
 import com.nhanph.doanandroid.data.entities.Pin;
 import com.nhanph.doanandroid.data.interfaces.OnPinClickListener;
 import com.nhanph.doanandroid.databinding.FragmentHomeProfilePinBinding;
-import com.nhanph.doanandroid.view.home.feed.PinDetailFragment;
+import com.nhanph.doanandroid.utility.helper.PinClickHelper;
+import com.nhanph.doanandroid.view.home.ShareDataHomeViewModel;
+import com.nhanph.doanandroid.view.home.profile.profile_child_fragment.profile_setting_child.ProfileShareDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Setter;
 
-public class ProfilePinFragment extends Fragment {
+public class SavedPinFragment extends Fragment {
+    private SavedPinViewModel viewModel;
+    private ProfileShareDataViewModel shareDataViewModel;
 
-    private ProfilePinViewModel viewModel;
+    private ShareDataHomeViewModel shareDataHomeViewModel;
+
     private List<Pin> pinList = new ArrayList<>();
 
     private PinAdapter pinAdapter;
@@ -46,7 +50,9 @@ public class ProfilePinFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentHomeProfilePinBinding.inflate(inflater, container, false);
 
-        viewModel = new ViewModelProvider(this).get(ProfilePinViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SavedPinViewModel.class);
+        shareDataViewModel = new ViewModelProvider(requireActivity()).get(ProfileShareDataViewModel.class);
+        shareDataHomeViewModel = new ViewModelProvider(requireActivity()).get(ShareDataHomeViewModel.class);
 
         return binding.getRoot();
     }
@@ -65,13 +71,40 @@ public class ProfilePinFragment extends Fragment {
         binding = null;
     }
 
-    public ProfilePinFragment(int gridLayout, boolean pinInfoEnabled){
+    public SavedPinFragment(int gridLayout, boolean pinInfoEnabled){
         super();
         this.gridLayout = gridLayout;
         this.pinInfoEnabled = pinInfoEnabled;
     }
 
     private void initView(View view) {
+
+        shareDataViewModel.getUserId().observe(getViewLifecycleOwner(), userId -> {
+                    if (userId != null) {
+                        viewModel.setUserId(userId);
+                    }
+                });
+
+        pinClickListener = new OnPinClickListener() {
+            @Override
+            public void onPinClick(int position) {
+                shareDataViewModel.setSelectedSavedPin(pinList.get(position));
+            }
+
+            @Override
+            public void onPinLongClick(int position, float x, float y) {
+                Pin pin = pinList.get(position);
+
+                PinClickHelper.handlePinLongClick(pin, shareDataHomeViewModel, binding.pinRecyclerView, position, x, y);
+            }
+
+            @Override
+            public void onPinLongClickRelease(int position, float x, float y) {
+                Pin pin = pinList.get(position);
+                PinClickHelper.handlePinLongClickRelease(pin, shareDataHomeViewModel, binding.pinRecyclerView, position, x, y);
+            }
+
+        };
         setRecyclerView();
         observedRegister();
 
@@ -83,8 +116,8 @@ public class ProfilePinFragment extends Fragment {
 
     private void initEvent(View view) {
         binding.swipeRefresh.setOnRefreshListener(() -> {
-           viewModel.getList();
-           binding.swipeRefresh.setRefreshing(false);
+            viewModel.getList();
+            binding.swipeRefresh.setRefreshing(false);
         });
     }
 

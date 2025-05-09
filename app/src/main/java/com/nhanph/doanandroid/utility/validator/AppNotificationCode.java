@@ -22,6 +22,10 @@ public enum AppNotificationCode {
 
     GET_LIST_PIN_SUCCESS(17, "Lấy danh sách pin thành công"),
 
+    SAVE_PIN_SUCCESS(18, "Lưu pin thành công"),
+
+    UNSAVE_PIN_SUCCESS(19, "Bỏ lưu pin thành công"),
+
     SERVER_ERROR(9997, "Lỗi server"),
     NETWORK_ERROR(9998, "Lỗi mạng"),
     UNKNOWN_ERROR(9999, "Lỗi không xác định");

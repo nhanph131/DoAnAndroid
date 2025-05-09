@@ -1,7 +1,5 @@
 package com.nhanph.doanandroid.data.apiservice.response.user;
 
-import java.time.LocalDate;
-
 import lombok.Data;
 
 @Data
@@ -12,6 +10,9 @@ public class UserProfileResponse {
 
     private String avatarUrl;
     private String bio;
+
+    private int followerCount;
+    private int followingCount;
 
     private String createdAt;
 }

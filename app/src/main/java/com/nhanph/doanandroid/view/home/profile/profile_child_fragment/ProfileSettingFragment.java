@@ -1,9 +1,7 @@
-package com.nhanph.doanandroid.view.home.profile.profile_view;
+package com.nhanph.doanandroid.view.home.profile.profile_child_fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +15,7 @@ import com.nhanph.doanandroid.MainApplication;
 import com.nhanph.doanandroid.R;
 import com.nhanph.doanandroid.databinding.FragmentHomeProfileSettingBinding;
 import com.nhanph.doanandroid.databinding.ItemSettingBinding;
+import com.nhanph.doanandroid.view.home.profile.profile_child_fragment.profile_setting_child.ProfileViewFragment;
 import com.nhanph.doanandroid.view.login.LoginActivity;
 
 public class ProfileSettingFragment extends Fragment {
@@ -47,6 +46,8 @@ public class ProfileSettingFragment extends Fragment {
     }
 
     private void initView(View view) {
+        binding.nickname.setText(MainApplication.getNickname());
+
         ItemSettingBinding profileBinding = binding.profileManagement;
         profileBinding.settingTitle.setText("Cài đặt trang cá nhân");
 
@@ -78,16 +79,13 @@ public class ProfileSettingFragment extends Fragment {
                             R.anim.slide_in_left,   // pop enter (khi quay lại)
                             R.anim.slide_out_right  // pop exit
                     )
-                    .add(binding.containerProfile.getId(), new ProfileViewFragment(), "profileview")
+                    .add(binding.containerProfile.getId(), new ProfileViewFragment(MainApplication.getUid()), "profileview")
                     .addToBackStack(null)
                     .commit();
         });
 
         binding.logOut.settingTitle.setOnClickListener(v -> {
-            MainApplication.clearUid();
-            MainApplication.clearUsername();
-            MainApplication.clearAvatarUrl();
-            MainApplication.clearAvatarFileName();
+            MainApplication.logout();
 
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);

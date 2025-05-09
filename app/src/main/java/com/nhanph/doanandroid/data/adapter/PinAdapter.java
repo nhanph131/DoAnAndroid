@@ -1,12 +1,20 @@
 package com.nhanph.doanandroid.data.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +37,7 @@ import retrofit2.Response;
 
 public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Pin> pinList;
 
     private final boolean pinInfoEnabled;
@@ -47,9 +55,10 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
     @Override
     public PinViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_pin, parent, false);
-        return new PinViewHolder(view, pinInfoEnabled);
+        return new PinViewHolder(view, pinInfoEnabled, onPinClickListener);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull PinViewHolder holder, int position) {
         Pin pin = pinList.get(position);
@@ -89,9 +98,6 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
             }
         });
 
-        holder.pin_image.setOnClickListener(v -> onPinClickListener.onPinClick(position));
-
-        //holder.pin_image.setOnLongClickListener(v -> onPinClickListener.onPinLongClick(position));
     }
 
     @Override
@@ -103,7 +109,10 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
 
         ImageView pin_image, avatar, action;
         TextView description;
-        public PinViewHolder(@NonNull View itemView, boolean pinInfoEnabled) {
+        private boolean isLongPressed = false;
+        GestureDetector gestureDetector;
+        @SuppressLint("ClickableViewAccessibility")
+        public PinViewHolder(@NonNull View itemView, boolean pinInfoEnabled, OnPinClickListener pinClickListener) {
             super(itemView);
             pin_image = itemView.findViewById(R.id.pin_image);
             avatar = itemView.findViewById(R.id.avatar);
@@ -112,6 +121,45 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
             if (!pinInfoEnabled){
                 itemView.findViewById(R.id.pin_info).setVisibility(View.GONE);
             }
+
+            gestureDetector = new GestureDetector(itemView.getContext(), new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapConfirmed(MotionEvent e) {
+                    if (getBindingAdapterPosition() != RecyclerView.NO_POSITION) {
+                        pinClickListener.onPinClick(getBindingAdapterPosition());
+                    }
+                    return true;
+                }
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    disallowAllParentsInterceptTouchEvent(itemView, true);
+                    if (getBindingAdapterPosition() != RecyclerView.NO_POSITION) {
+                        isLongPressed = true;
+                        pinClickListener.onPinLongClick(getBindingAdapterPosition(), e.getRawX(), e.getRawY());
+                    }
+                }
+            });
+
+            itemView.setOnTouchListener((v, event) -> {
+                gestureDetector.onTouchEvent(event);
+
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (isLongPressed) {
+                        isLongPressed = false;
+                        disallowAllParentsInterceptTouchEvent(v, false);
+                        pinClickListener.onPinLongClickRelease(getBindingAdapterPosition(), event.getRawX(), event.getRawY());
+                    }
+                    return true;
+                }
+                return true;
+            });
+
         }
+        private void disallowAllParentsInterceptTouchEvent(View view, boolean disallow)  {
+            ViewParent parent = view.getParent();
+            parent.requestDisallowInterceptTouchEvent(disallow);
+        }
+
     }
 }

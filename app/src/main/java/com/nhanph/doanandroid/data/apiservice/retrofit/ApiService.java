@@ -32,20 +32,26 @@ public interface ApiService {
 //    @PUT("/user/update-profile")
 
     //pin
-    @GET("pin/get-feed")
-    Call<ResponseApi<List<PinResponse>>> getFeed();
+    @GET("pin/get-feed/{userId}")
+    Call<ResponseApi<List<PinResponse>>> getFeed(@Path("userId") String userId);
 
-    @GET("pin/detail/{pinId}")
-    Call<ResponseApi<PinDetailResponse>> getPinDetail(@Path("pinId") int pinId);
+    @GET("pin/detail/{pinId}/{userId}")
+    Call<ResponseApi<PinDetailResponse>> getPinDetail(@Path("pinId") int pinId, @Path("userId") String userId);
+
+    @GET("pin/get-all/{userId}")
+    Call<ResponseApi<List<PinResponse>>> getCreatedPinByUserId(@Path("userId") String userId);
 
     @GET("pin/saved-pin/{userId}")
     Call<ResponseApi<List<PinResponse>>> getSavedPinByUserId(@Path("userId") String userId);
 
-    @GET("pin/save")
-    Call<ResponseApi<List<PinResponse>>> savePin(@Body PinSaveRequest pinSaveRequest);
+    @GET("pin/saved-created/{userId}")
+    Call<ResponseApi<List<PinResponse>>> getSavedCreatedByUserId(@Path("userId") String userId);
 
-    @GET("pin/unsave")
-    Call<ResponseApi<List<PinResponse>>> unsavePin(@Body PinSaveRequest pinSaveRequest);
+    @POST("pin/save")
+    Call<ResponseApi<String>> savePin(@Body PinSaveRequest pinSaveRequest);
+
+    @POST("pin/unsave")
+    Call<ResponseApi<String>> unsavePin(@Body PinSaveRequest pinSaveRequest);
 
     //profile
     @GET("user/get-profile/{userId}")

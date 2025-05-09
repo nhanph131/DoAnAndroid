@@ -13,5 +13,7 @@ public class PinDetailResponse {
     private int followerCount;
     private int commentCount;
 
+    private  boolean saved;
+
     private int likeCount;
 }
